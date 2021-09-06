@@ -6,20 +6,20 @@ Pimox is a port of Proxmox to the Raspberry Pi allowing you to build a Proxmox c
 Requirements
 ---
 * Raspberry Pi 4
-* Pre-installed Debian __Bullseye__ based 64-bit OS ___(not 32-bit)___
-
-Prechecks
----
-1. In /etc/network/interfaces, give the Pi a static IP address. You cannot use dhcp.
-2. In /etc/network/interfaces, remove any IPv6 addresses.
-3. In /etc/hostname, make sure the Pi has a name.
-4. In /etc/hosts, make sure this hostname corresponds to the static IP you previous set.
+* Pre-installed Debian __Bullseye__ based 64-bit OS ___(not 32-bit)___ (Works on [DietPi](https://dietpi.com/) too)
 
 Install
 ---
-1. Do this at the console, not over a network. The network will be reconfigured as part of the install.
-2. sudo -s
-3. curl https://raw.githubusercontent.com/pimox/pimox7/master/pimox.sh | sh
+__Note: The network will be reconfigured as part of the install. You may lose networking if the install does not complete!__
+```sh
+sudo -s
+wget https://raw.githubusercontent.com/ZwCreatePhoton/pimox7/master/RPiOS64fullautoinst.sh
+# Modify hostname and network settings (HOSTNAM, RPI4_IP, GATEWAY, NETMASK) in a file editor.
+nano RPiOS64fullautoinst.sh
+#vi RPiOS64fullautoinst.sh
+cat RPiOS64fullautoinst.sh | sh &
+# The system will reboot upon installation completion
+```
 
 Notes
 ---
