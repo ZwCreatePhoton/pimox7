@@ -59,5 +59,7 @@ sudo printf "$RPI4_IP\t$HOSTNAM
 sudo apt purge -y dhcpcd5 #dphys-swapfile #if remove wanted
 sudo apt autoremove -y
 
+sudo systemctl stop dropbear
+
 sudo DEBIAN_FRONTEND=noninteractive apt install -y -o Dpkg::Options::="--force-confdef" proxmox-ve
 sudo systemctl reboot
