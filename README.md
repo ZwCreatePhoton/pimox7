@@ -17,8 +17,13 @@ wget https://raw.githubusercontent.com/ZwCreatePhoton/pimox7/master/RPiOS64fulla
 # Modify hostname and network settings (HOSTNAM, RPI4_IP, GATEWAY, NETMASK) in a file editor.
 nano RPiOS64fullautoinst.sh
 #vi RPiOS64fullautoinst.sh
+# If an SSH server is running on port 22, it must be disabled prior to the proxmox-ve install command.
+# If installing proxmox over SSH, add the command to disable the SSH server into the script.
+# The script is configured to disable dropbear (dropbear is DietPi's default SSH server)
 cat RPiOS64fullautoinst.sh | sh &
 # The system will reboot upon installation completion
+# After reboot, you must uninstall the previous SSH server, if applicable.
+# sudo apt purge -y dropbear ; sudo reboot
 ```
 
 Notes
