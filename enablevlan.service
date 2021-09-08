@@ -1,0 +1,12 @@
+[Unit]
+Description=Enable VLAN on vmbr0 after network is available
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=enablevlan.sh
+
+[Install]
+WantedBy=multi-user.target
