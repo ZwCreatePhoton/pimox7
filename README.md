@@ -11,7 +11,7 @@ Requirements
 Install
 ---
 __Note: The network will be reconfigured as part of the install. You may lose networking if the install does not complete!__
-```sh
+```bash
 sudo -s
 wget https://raw.githubusercontent.com/ZwCreatePhoton/pimox7/master/RPiOS64fullautoinst.sh
 # Modify hostname and network settings (HOSTNAM, RPI4_IP, GATEWAY, NETMASK) in a file editor.
@@ -25,6 +25,25 @@ cat RPiOS64fullautoinst.sh | sh &
 # After reboot, you must uninstall the previous SSH server, if applicable.
 # sudo apt purge -y dropbear ; sudo reboot
 ```
+
+
+VLAN aware vmbr0
+---
+To utilizing networking with VMs, you'll need to create a bridge like you would for x64 Proxmox.\
+Define vmbr0 in /etc/network/interfaces like normal.\
+For me, if I made vmbr0 vlan aware, the interfaces would not be brought up upon reboot, and all networking would be lost.\
+To set vmbr0 to be vlan aware, vmbr0 must first be brought up without vlan aware enabled.\
+Afterwards, vmbr0 can be set to be vlan aware and networking can be restarted.\
+To automate this on boot run:
+```bash
+sudo -s
+wget -O /etc/systemd/system/enablevlan.service https://raw.githubusercontent.com/ZwCreatePhoton/pimox7/master/enablevlan.service
+wget -O /usr/local/sbin/enablevlan.sh https://raw.githubusercontent.com/ZwCreatePhoton/pimox7/master/enablevlan.sh
+chmod +x /usr/local/sbin/enablevlan.sh
+systemctl enable enablevlan
+reboot
+```
+
 
 Notes
 ---
